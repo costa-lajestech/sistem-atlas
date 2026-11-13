@@ -331,7 +331,7 @@
     effective: function () {
       var t = App.theme.get();
       if (t === 'dark' || t === 'light') return t;
-      try { return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; } catch (e) { return 'light'; }
+      return 'light'; /* padrão claro (não segue o tema do sistema operacional) */
     },
     set: function (t, persist) {
       document.documentElement.setAttribute('data-theme', t);

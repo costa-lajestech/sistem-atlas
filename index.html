@@ -6,12 +6,12 @@
   <title>Atlas · Gestão</title>
   <meta name="description" content="Protótipo navegável do sistema interno da Atlas Corporate: núcleo, CRM comercial, jurídico, financeiro e intranet. Dados fictícios.">
   <script>
-    /* Tema antes de pintar (evita piscar): ?tema=escuro|claro > localStorage > sistema */
+    /* Tema antes de pintar (evita piscar): ?tema=escuro|claro > localStorage > padrão CLARO */
     (function () {
       var m = location.search.match(/[?&]tema=([a-z]+)/), t = null;
       if (m) t = (m[1] === 'escuro' || m[1] === 'dark') ? 'dark' : 'light';
       else { try { var s = localStorage.getItem('atlas-tema'); if (s === 'dark' || s === 'light') t = s; } catch (e) {} }
-      if (t) document.documentElement.setAttribute('data-theme', t);
+      document.documentElement.setAttribute('data-theme', t || 'light');
     })();
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">

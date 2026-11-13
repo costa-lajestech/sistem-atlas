@@ -138,11 +138,11 @@
   --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px; --sp-5: 20px;
   --sp-6: 24px; --sp-8: 32px; --sp-10: 40px; --sp-12: 48px;
 
-  /* ---- Raios (Atlas usa cantos retos/pequenos) ---- */
-  --r-xs: 2px;   /* chips, badges */
-  --r-sm: 3px;   /* botões, inputs (igual ao site) */
-  --r-md: 4px;   /* cards, tabelas */
-  --r-lg: 6px;   /* diálogos, sheets */
+  /* ---- Raios (13/11: um pouco mais arredondados, visual mais moderno) ---- */
+  --r-xs: 4px;   /* chips, badges */
+  --r-sm: 6px;   /* botões, inputs */
+  --r-md: 10px;  /* cards, tabelas */
+  --r-lg: 14px;  /* diálogos, sheets */
   --r-pill: 999px; /* só avatar, toggle e contadores */
 
   /* ---- Sombras ---- */
