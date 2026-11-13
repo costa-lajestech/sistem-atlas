@@ -1,0 +1,268 @@
+/* ==========================================================================
+   ATLAS · Sistema interno — TOKENS (protótipo HTML)
+   Fonte da identidade: site atlascorporate.com.br (_site-atlas-global.css)
+   Regra de tema:
+     - tudo é definido em :root no tema CLARO;
+     - @media (prefers-color-scheme: dark) com :root:not([data-theme="light"]) e
+       :root[data-theme="dark"] redefinem para o ESCURO (preto + dourado do site).
+   Módulos NÃO criam cores novas: usam só estas variáveis.
+
+   CONTRASTE CALCULADO (fórmula de luminância relativa WCAG 2.x)
+   Claro
+     --text      #16130E sobre --surface #FFFFFF ........ 18,52:1
+     --text      #16130E sobre --bg      #F7F4EE ........ 16,88:1
+     --text-2    #4A4A50 sobre #FFFFFF / #F7F4EE ........  8,80 / 8,02:1
+     --text-muted#66666C sobre #FFFFFF / #F7F4EE / #F3EFE8  5,70 / 5,20 / 4,98:1
+     --gold-text #8A6320 sobre #FFFFFF / #F7F4EE ........  5,40 / 4,92:1
+     --gold-text #8A6320 sobre --gold-subtle #F6EEDD ....  4,68:1
+     --on-gold   #060606 sobre --gold #C4923A ...........  7,26:1  (botão primário)
+     --on-gold   #060606 sobre --gold-hover #D4A85A .....  9,21:1
+     tons (strong sobre subtle): blue 6,32 · green 6,14 · amber 5,28 · violet 7,09
+                                 slate 6,83 · red 6,70 · gray 7,59 · gold 4,68
+     #FFFFFF sobre --danger #C8372B (botão perigo) ......  5,20:1
+     cabeçalho dos blocos de Fluxos (claro): #0A0A0A sobre dourado 7,3 · branco sobre #2F6A9E 5,7 ·
+       #6E56B0 5,8 · #237247 5,9 · #5F5B55 6,7  (escuro: #0A0A0A sobre todos, ≥ 5,2)
+     ATENÇÃO: #C4923A NUNCA como cor de texto no claro (≈2,6:1). Use --gold-text.
+   Escuro
+     --text      #F2EEE7 sobre --bg #0A0A0A / --surface #141414  17,12 / 15,93:1
+     --text-2    #B8B2A7 sobre #141414 ......................  8,74:1
+     --text-muted#8F8A82 sobre #141414 / #0A0A0A / #222222 ...  5,37 / 5,78 / 4,64:1
+     --gold-text #D4A85A sobre #141414 / #0A0A0A ............  8,38 / 9,00:1
+     tons (strong sobre subtle): gold 9,05 · blue 8,58 · green 9,28 · amber 9,60
+                                 violet 8,12 · slate 8,64 · red 8,22 · gray 9,61
+     #0A0A0A sobre --danger #E0574A ...........................  5,31:1
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* ---- Marca (iguais nos dois temas) ---- */
+  --gold:        #C4923A;   /* fundos, bordas, faixas, ícones decorativos */
+  --gold-hover:  #D4A85A;
+  --gold-press:  #9A7028;
+  --on-gold:     #060606;   /* texto SOBRE dourado: sempre preto */
+
+  /* ---- Superfícies ---- */
+  --bg:            #F7F4EE;  /* fundo da página (off-white do site) */
+  --surface:       #FFFFFF;  /* cards, tabelas, inputs */
+  --surface-2:     #FAF8F4;  /* cabeçalho de tabela, áreas secundárias dentro de card */
+  --surface-3:     #F3EFE8;  /* hover de linha, trilhos, skeleton */
+  --surface-sunken:#EFEBE3;  /* fundo de kanban, canvas de fluxos */
+  --sidebar-bg:    #FFFFFF;
+  --topbar-bg:     rgba(255,255,255,.92);
+  --overlay:       rgba(10,8,4,.48);
+
+  /* ---- Bordas ---- */
+  --border:        #E6E0D5;
+  --border-strong: #CFC6B6;
+  --divider:       #EEE9E0;
+
+  /* ---- Texto ---- */
+  --text:        #16130E;
+  --text-2:      #4A4A50;
+  --text-muted:  #66666C;
+  --text-faint:  #9A958D;   /* só placeholder e texto decorativo (não informativo) */
+  --text-inverse:#FFFFFF;
+
+  /* ---- Dourado funcional ---- */
+  --gold-text:    #8A6320;  /* links, rótulos dourados, texto ativo no claro */
+  --gold-subtle:  #F6EEDD;  /* fundo de item ativo, destaque */
+  --gold-border:  #E6D2A8;
+  --gold-focus:   rgba(196,146,58,.45);
+
+  /* ---- Semânticas: solid (fundo forte) · text (texto) · subtle (fundo) · border ---- */
+  --success:        #2E8B57; --success-text: #17663F; --success-subtle: #E8F3EC; --success-border: #BFDCC9;
+  --warning:        #D99A1E; --warning-text: #8A5A00; --warning-subtle: #FBF1DC; --warning-border: #EED6A3;
+  --danger:         #C8372B; --danger-text:  #A01E14; --danger-subtle:  #FBEAE8; --danger-border:  #F1C3BD;
+  --info:           #3B7BB5; --info-text:    #245A86; --info-subtle:    #E7F0F7; --info-border:    #C3D7E8;
+  --on-danger:      #FFFFFF;
+
+  /* ---- Tons dos cards de formulário e chips (subtle · border · solid · strong) ----
+     gold   = identificação e dados principais
+     blue   = contato, pessoas, comunicação
+     green  = valores, honorários, resultado, fechamento
+     amber  = prazos, pendências, condições
+     violet = classificação, categorias, regras
+     slate  = observações, dados técnicos, anexos
+     red / gray = só para chips de status                                          */
+  --tone-gold-subtle:#F6EEDD;   --tone-gold-border:#E6D2A8;   --tone-gold-solid:#C4923A;   --tone-gold-strong:#8A6320;
+  --tone-blue-subtle:#E7F0F7;   --tone-blue-border:#C3D7E8;   --tone-blue-solid:#3B7BB5;   --tone-blue-strong:#245A86;
+  --tone-green-subtle:#E8F3EC;  --tone-green-border:#BFDCC9;  --tone-green-solid:#2E8B57;  --tone-green-strong:#17663F;
+  --tone-amber-subtle:#FBF1DC;  --tone-amber-border:#EED6A3;  --tone-amber-solid:#D99A1E;  --tone-amber-strong:#8A5A00;
+  --tone-violet-subtle:#EFEBF7; --tone-violet-border:#D6CCEB; --tone-violet-solid:#6E56B0; --tone-violet-strong:#553F94;
+  --tone-slate-subtle:#F1F0EE;  --tone-slate-border:#DEDBD5;  --tone-slate-solid:#77736C;  --tone-slate-strong:#55524D;
+  --tone-red-subtle:#FBEAE8;    --tone-red-border:#F1C3BD;    --tone-red-solid:#C8372B;    --tone-red-strong:#A01E14;
+  --tone-gray-subtle:#EFEEEC;   --tone-gray-border:#DDDAD4;   --tone-gray-solid:#9A958D;   --tone-gray-strong:#4A4A50;
+
+  /* ---- Gráficos (ordem fixa de séries) ---- */
+  --chart-1: #C4923A;  /* dourado */
+  --chart-2: #2B2B30;  /* grafite */
+  --chart-3: #3B7BB5;  /* azul */
+  --chart-4: #2E8B57;  /* verde */
+  --chart-5: #B3ADA3;  /* neutro */
+  --chart-6: #6E56B0;  /* violeta */
+  --chart-grid: #ECE7DE;
+  --chart-axis: #66666C;
+
+  /* ---- Fluxos (categorias de bloco, como no editor do Bubble) ---- */
+  --flow-trigger: #C4923A;   /* gatilho */
+  --flow-condition: #D99A1E; /* condição "Somente quando…" */
+  --flow-action: #2F6A9E;    /* ação de dados */
+  --flow-notify: #6E56B0;    /* notificação / e-mail */
+  --flow-task: #237247;      /* criar tarefa */
+  --flow-wait: #5F5B55;      /* aguardar / agendar */
+  --flow-edge: #B9AF9E;
+  /* texto do cabeçalho de cada bloco (≥ 4,5:1): preto sobre dourado/âmbar, branco sobre os demais */
+  --flow-ink-trigger: #0A0A0A; --flow-ink-condition: #0A0A0A; --flow-ink-action: #FFFFFF;
+  --flow-ink-notify: #FFFFFF;  --flow-ink-task: #FFFFFF;      --flow-ink-wait: #FFFFFF;
+
+  /* ---- Tipografia ---- */
+  --ff-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --ff-sans:  'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ff-mono:  ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --fs-display: 30px;  /* título de login / boas-vindas */
+  --fs-page:    26px;  /* título da página (serif 600) */
+  --fs-title:   18px;  /* título de card / sheet (serif 600) */
+  --fs-section: 14px;  /* título de seção de formulário (sans 600) */
+  --fs-body:    14px;
+  --fs-small:   13px;
+  --fs-hint:    12px;
+  --fs-label:   11px;  /* rótulo em caixa alta com letter-spacing */
+  --fs-kpi:     26px;
+  --lh-tight: 1.2;
+  --lh-body: 1.5;
+  --ls-label: .14em;
+  --fw-regular: 400; --fw-medium: 500; --fw-semibold: 600; --fw-bold: 700;
+
+  /* ---- Espaçamento (base 4) ---- */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px; --sp-5: 20px;
+  --sp-6: 24px; --sp-8: 32px; --sp-10: 40px; --sp-12: 48px;
+
+  /* ---- Raios (Atlas usa cantos retos/pequenos) ---- */
+  --r-xs: 2px;   /* chips, badges */
+  --r-sm: 3px;   /* botões, inputs (igual ao site) */
+  --r-md: 4px;   /* cards, tabelas */
+  --r-lg: 6px;   /* diálogos, sheets */
+  --r-pill: 999px; /* só avatar, toggle e contadores */
+
+  /* ---- Sombras ---- */
+  --shadow-xs: 0 1px 2px rgba(22,19,14,.05);
+  --shadow-sm: 0 1px 2px rgba(22,19,14,.06), 0 2px 8px rgba(22,19,14,.04);
+  --shadow-md: 0 4px 16px rgba(22,19,14,.08), 0 1px 3px rgba(22,19,14,.06);
+  --shadow-lg: 0 18px 48px rgba(22,19,14,.18), 0 2px 8px rgba(22,19,14,.08);
+  --shadow-gold: 0 8px 24px -10px rgba(196,146,58,.55);
+
+  /* ---- Layout ---- */
+  --sidebar-w: 248px;
+  --sidebar-w-collapsed: 64px;
+  --topbar-h: 56px;
+  --page-pad: 24px;
+  --sheet-w: 640px;
+  --content-max: 1480px;
+
+  /* ---- Movimento ---- */
+  --ease: cubic-bezier(.2,.7,.2,1);
+  --dur-1: .12s; --dur-2: .2s; --dur-3: .32s;
+
+  /* ---- Logo por tema (usado pelo shell) ---- */
+  --logo-light-display: block;  /* logo-atlas.webp (escura, para fundo claro) */
+  --logo-dark-display: none;    /* logo-atlas-wh.webp (branca, para fundo escuro) */
+}
+
+/* ===================== TEMA ESCURO ===================== */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg:            #0A0A0A;
+    --surface:       #141414;
+    --surface-2:     #181818;
+    --surface-3:     #1E1E1E;
+    --surface-sunken:#0F0F0F;
+    --sidebar-bg:    #060606;
+    --topbar-bg:     rgba(10,10,10,.92);
+    --overlay:       rgba(0,0,0,.66);
+    --border:        #262626;
+    --border-strong: #3A3A3A;
+    --divider:       #1F1F1F;
+    --text:        #F2EEE7;
+    --text-2:      #B8B2A7;
+    --text-muted:  #8F8A82;
+    --text-faint:  #5E5A55;
+    --text-inverse:#0A0A0A;
+    --gold-text:    #D4A85A;
+    --gold-subtle:  #221B10;
+    --gold-border:  #4A3A1E;
+    --gold-focus:   rgba(212,168,90,.5);
+    --success:#3FA36C; --success-text:#78D3A2; --success-subtle:#10211A; --success-border:#1F4433;
+    --warning:#E0A42A; --warning-text:#EDBE5E; --warning-subtle:#261D0C; --warning-border:#4F3C15;
+    --danger:#E0574A;  --danger-text:#F49A90;  --danger-subtle:#2A1312;  --danger-border:#5A2621;
+    --info:#4E8FCB;    --info-text:#8DBDE6;    --info-subtle:#111D28;    --info-border:#22384D;
+    --on-danger: #0A0A0A;
+    --tone-gold-subtle:#221B10;   --tone-gold-border:#4A3A1E;   --tone-gold-solid:#C4923A;   --tone-gold-strong:#E0B76A;
+    --tone-blue-subtle:#111D28;   --tone-blue-border:#22384D;   --tone-blue-solid:#4E8FCB;   --tone-blue-strong:#8DBDE6;
+    --tone-green-subtle:#10211A;  --tone-green-border:#1F4433;  --tone-green-solid:#3FA36C;  --tone-green-strong:#78D3A2;
+    --tone-amber-subtle:#261D0C;  --tone-amber-border:#4F3C15;  --tone-amber-solid:#E0A42A;  --tone-amber-strong:#EDBE5E;
+    --tone-violet-subtle:#1B1628; --tone-violet-border:#362C52; --tone-violet-solid:#8C74D1; --tone-violet-strong:#B7A6EC;
+    --tone-slate-subtle:#1C1C1C;  --tone-slate-border:#333333;  --tone-slate-solid:#8A8580;  --tone-slate-strong:#BDB8B0;
+    --tone-red-subtle:#2A1312;    --tone-red-border:#5A2621;    --tone-red-solid:#E0574A;    --tone-red-strong:#F49A90;
+    --tone-gray-subtle:#1E1E1E;   --tone-gray-border:#333333;   --tone-gray-solid:#77726B;   --tone-gray-strong:#C9C4BC;
+    --chart-1:#D4A85A; --chart-2:#E8E3DA; --chart-3:#5B9BD5; --chart-4:#4FB57A; --chart-5:#5E5A55; --chart-6:#9B85DB;
+    --chart-grid:#222222; --chart-axis:#8F8A82;
+    --flow-trigger:#C4923A; --flow-condition:#E0A42A; --flow-action:#4E8FCB; --flow-notify:#8C74D1; --flow-task:#3FA36C; --flow-wait:#8A8580; --flow-edge:#4A453E;
+    --flow-ink-trigger:#0A0A0A; --flow-ink-condition:#0A0A0A; --flow-ink-action:#0A0A0A; --flow-ink-notify:#0A0A0A; --flow-ink-task:#0A0A0A; --flow-ink-wait:#0A0A0A;
+    --shadow-xs: 0 1px 2px rgba(0,0,0,.4);
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.5);
+    --shadow-md: 0 6px 20px rgba(0,0,0,.5);
+    --shadow-lg: 0 24px 60px rgba(0,0,0,.7), 0 0 0 1px #262626;
+    --shadow-gold: 0 10px 30px -12px rgba(196,146,58,.45);
+    --logo-light-display: none;
+    --logo-dark-display: block;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:            #0A0A0A;
+  --surface:       #141414;
+  --surface-2:     #181818;
+  --surface-3:     #1E1E1E;
+  --surface-sunken:#0F0F0F;
+  --sidebar-bg:    #060606;
+  --topbar-bg:     rgba(10,10,10,.92);
+  --overlay:       rgba(0,0,0,.66);
+  --border:        #262626;
+  --border-strong: #3A3A3A;
+  --divider:       #1F1F1F;
+  --text:        #F2EEE7;
+  --text-2:      #B8B2A7;
+  --text-muted:  #8F8A82;
+  --text-faint:  #5E5A55;
+  --text-inverse:#0A0A0A;
+  --gold-text:    #D4A85A;
+  --gold-subtle:  #221B10;
+  --gold-border:  #4A3A1E;
+  --gold-focus:   rgba(212,168,90,.5);
+  --success:#3FA36C; --success-text:#78D3A2; --success-subtle:#10211A; --success-border:#1F4433;
+  --warning:#E0A42A; --warning-text:#EDBE5E; --warning-subtle:#261D0C; --warning-border:#4F3C15;
+  --danger:#E0574A;  --danger-text:#F49A90;  --danger-subtle:#2A1312;  --danger-border:#5A2621;
+  --info:#4E8FCB;    --info-text:#8DBDE6;    --info-subtle:#111D28;    --info-border:#22384D;
+  --on-danger: #0A0A0A;
+  --tone-gold-subtle:#221B10;   --tone-gold-border:#4A3A1E;   --tone-gold-solid:#C4923A;   --tone-gold-strong:#E0B76A;
+  --tone-blue-subtle:#111D28;   --tone-blue-border:#22384D;   --tone-blue-solid:#4E8FCB;   --tone-blue-strong:#8DBDE6;
+  --tone-green-subtle:#10211A;  --tone-green-border:#1F4433;  --tone-green-solid:#3FA36C;  --tone-green-strong:#78D3A2;
+  --tone-amber-subtle:#261D0C;  --tone-amber-border:#4F3C15;  --tone-amber-solid:#E0A42A;  --tone-amber-strong:#EDBE5E;
+  --tone-violet-subtle:#1B1628; --tone-violet-border:#362C52; --tone-violet-solid:#8C74D1; --tone-violet-strong:#B7A6EC;
+  --tone-slate-subtle:#1C1C1C;  --tone-slate-border:#333333;  --tone-slate-solid:#8A8580;  --tone-slate-strong:#BDB8B0;
+  --tone-red-subtle:#2A1312;    --tone-red-border:#5A2621;    --tone-red-solid:#E0574A;    --tone-red-strong:#F49A90;
+  --tone-gray-subtle:#1E1E1E;   --tone-gray-border:#333333;   --tone-gray-solid:#77726B;   --tone-gray-strong:#C9C4BC;
+  --chart-1:#D4A85A; --chart-2:#E8E3DA; --chart-3:#5B9BD5; --chart-4:#4FB57A; --chart-5:#5E5A55; --chart-6:#9B85DB;
+  --chart-grid:#222222; --chart-axis:#8F8A82;
+  --flow-trigger:#C4923A; --flow-condition:#E0A42A; --flow-action:#4E8FCB; --flow-notify:#8C74D1; --flow-task:#3FA36C; --flow-wait:#8A8580; --flow-edge:#4A453E;
+    --flow-ink-trigger:#0A0A0A; --flow-ink-condition:#0A0A0A; --flow-ink-action:#0A0A0A; --flow-ink-notify:#0A0A0A; --flow-ink-task:#0A0A0A; --flow-ink-wait:#0A0A0A;
+  --shadow-xs: 0 1px 2px rgba(0,0,0,.4);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.5);
+  --shadow-md: 0 6px 20px rgba(0,0,0,.5);
+  --shadow-lg: 0 24px 60px rgba(0,0,0,.7), 0 0 0 1px #262626;
+  --shadow-gold: 0 10px 30px -12px rgba(196,146,58,.45);
+  --logo-light-display: none;
+  --logo-dark-display: block;
+}
